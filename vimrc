@@ -35,6 +35,7 @@
 
 
 
+
 " GENERAL {
 
 	filetype plugin indent on							" Detect by filetype
