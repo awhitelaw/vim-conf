@@ -1,15 +1,15 @@
 " INITIAL {
-	set nocompatible									" Disable Vi compatibility (required)
-	
-	" Windows Compat {
-		" Force windows to use .vim instead of vimfiles.
+set nocompatible									" Disable Vi compatibility (required)
+
+" Windows Compat {
+	" Force windows to use .vim instead of vimfiles.
 		if has('win32') || has('win64')                           
 			set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 		endif
 	" }	
 " }
 
- 
+
 
 
 " BUNDLES {
@@ -18,7 +18,7 @@
 		call vundle#rc()
 		Bundle 'gmarik/vundle'
 	" }
-	
+
 	" DEPENDENCIES {
 		Bundle 'MarcWeber/vim-addon-mw-utils'
 		Bundle 'tomtom/tlib_vim'
@@ -26,14 +26,14 @@
 			Bundle 'mileszs/ack.vim'
 		endif
 	" }
-	
+
 	" Theme {
 		Bundle 'flazz/vim-colorschemes'
 		Bundle 'nanotech/jellybeans.vim'
 		Bundle 'chriskempson/vim-tomorrow-theme'
 		Bundle 'altercation/vim-colors-solarized'
 	" }
-	
+
 	" General {
 		"File Explorer"
 		Bundle 'scrooloose/nerdtree'
@@ -44,9 +44,9 @@
 		"Surroundings management. Add xml/html surroundings or brackets, speech marks etc"
 		Bundle 'tpope/vim-surround'
 		"Autoclose quotes, tags etc"
-        Bundle 'AutoClose'
+		Bundle 'AutoClose'
 		"Full path fuzzy file, buffer, mru, tag, ... finder for Vim."
-        Bundle 'kien/ctrlp.vim'
+		Bundle 'kien/ctrlp.vim'
 		"Improved Matching from %"
 		Bundle 'matchit.zip'
 		"Status line modifier"
@@ -62,7 +62,7 @@
 	" }
 
 	" Programming {
-		
+
 		" General {
 			"Syntax validation"
 			Bundle 'scrooloose/syntastic'
@@ -77,16 +77,16 @@
 			"Some nice autocompletion"
 			Bundle 'Shougo/neocomplcache'
 		" }
-		
+
 		"HTML {
 			Bundle 'HTML-AutoCloseTag'
-            Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+			Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
 		" }
 
 		" Javascript {
 			Bundle 'leshill/vim-json'
-            Bundle 'groenewege/vim-less'
-            Bundle 'taxilian/vim-web-indent'
+			Bundle 'groenewege/vim-less'
+			Bundle 'taxilian/vim-web-indent'
 		" }
 
 
@@ -94,7 +94,7 @@
 			"Designed to provide PHP support"
 			Bundle 'spf13/PIV'
 		" }
-		
+
 		" Python { 
 			Bundle 'klen/python-mode'
 			Bundle 'python.vim'
@@ -106,13 +106,14 @@
 			Bundle 'tpope/vim-rails'
 		" }
 	" }
-		
+
 	" Version Control {
 		"GIT wrapper"
-		Bundle 'tpope/vim-fugitive'
+			Bundle 'tpope/vim-fugitive'
+		" }
 	" }
-" }
 
+" }
 
 " THEME SET {
 	if filereadable(expand("~/.vim/bundle/jellybeans.vim/colors/jellybeans.vim"))
@@ -131,7 +132,7 @@
 	set hidden											" Allow buffer switching without saving
 	set shortmess+=filmnrxoOtT							" Message abbreviation
 	set spell											" Enable spellchecking
-	
+
 	noremap , \
 	let mapleader=","									" Change the default leader key
 
@@ -171,7 +172,7 @@
 	set hlsearch
 	set wildmenu
 	set wildmode=list:longest,full
-    set wildignore+=*.o,*.obj,*.exe,*.so,*.dll,*.pyc,.svn,.hg,.bzr,.git,.sass-cache,*.class,*.scssc	
+	set wildignore+=*.o,*.obj,*.exe,*.so,*.dll,*.pyc,.svn,.hg,.bzr,.git,.sass-cache,*.class,*.scssc	
 " }
 
 
@@ -191,13 +192,13 @@
 	set foldenable										" auto fold code
 	"set list
 	"set listchars=tab:,.,trail:.,extends:#,nbsp:.		" Highlight problematic whitespace
-	
-	
+
+
 	if has('cmdline_info')
 		set ruler                   " show the ruler
 		set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-	    set showcmd                 " show partial commands in status line and
-	                                " selected characters/lines in visual mode
+		set showcmd                 " show partial commands in status line and
+		" selected characters/lines in visual mode
 	endif
 
 
@@ -213,26 +214,24 @@
 
 
 	" GUI Settings {
-		" GVIM- (here instead of .gvimrc)
-		if has('gui_running')
-			set guioptions-=T           " remove the toolbar
-			set lines=40                " 40 lines of text instead of 24,
-			if has("gui_gtk2")
-				set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 12
-			else
-				set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
-			endif
-			if has('gui_macvim')
-				set transparency=5          " Make the window slightly transparent
-			endif
+	" GVIM- (here instead of .gvimrc)
+	if has('gui_running')
+		set guioptions-=T           " remove the toolbar
+		set lines=40                " 40 lines of text instead of 24,
+		if has("gui_gtk2")
+			set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 12,Consolas\ Regular\ 12,Courier\ New\ Regular\ 12
 		else
-			if &term == 'xterm' || &term == 'screen'
-				set t_Co=256                 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
-			endif
-			"set term=builtin_ansi       " Make arrow and other keys work
+			set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h12,Consolas\ Regular:h12,Courier\ New\ Regular:h12
 		endif
-	" }
-
+		if has('gui_macvim')
+			set transparency=5          " Make the window slightly transparent
+		endif
+	else
+		if &term == 'xterm' || &term == 'screen'
+			set t_Co=256                 " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
+		endif
+		"set term=builtin_ansi       " Make arrow and other keys work
+	endif
 " }
 
 " Sounds {
@@ -248,26 +247,26 @@
 
 " PLUGINS{
 	" AutoCloseTag {
-		" Make it so AutoCloseTag works for xml and xhtml files as well
+	" Make it so AutoCloseTag works for xml and xhtml files as well
 		au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
 		nmap <Leader>ac <Plug>ToggleAutoCloseMappings
 	" }
-	
+
 	" Buffer explorer {
 		nmap <leader>b :BufExplorer<CR>
 	" }
 
 	" Ctags {
-      	set tags=/.vim/tags
-  	" }
+		set tags=/.vim/tags
+	" }
 
 	" ctrlp {
 		let g:ctrlp_working_path_mode = 2
 		nnoremap <silent> <D-t> :CtrlP<CR>
 		nnoremap <silent> <D-r> :CtrlPMRU<CR>
 		let g:ctrlp_custom_ignore = {
-				\ 'dir':  '\.git$\|\.hg$\|\.svn$',
-				\ 'file': '\.exe$\|\.so$\|\.dll$' }
+					\ 'dir':  '\.git$\|\.hg$\|\.svn$',
+					\ 'file': '\.exe$\|\.so$\|\.dll$' }
 	"}
 
 	" Fugitive {	
@@ -280,8 +279,8 @@
 	" }
 
 	" JSON {
-      	nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
-   	" }
+		nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
+	" }
 
 	" NERDTree {
 		if filereadable(expand('~/.vim/bundle/nerdtree/README.markdown'))
@@ -295,73 +294,73 @@
 			"let NERDTreeQuitOnOpen=1
 			let NERDTreeShowHidden=1
 			let NERDTreeKeepTreeInNewTab=1
-	
+
 			au VimEnter *  NERDTree                         " Auto open NERDTree when vim opens
 		endif		
 	" }
-	
+
 	" Misc {
-      	let g:NERDShutUp=1
-      	let b:match_ignorecase = 1
-  	" }
-	
+		let g:NERDShutUp=1
+		let b:match_ignorecase = 1
+	" }
+
 	" neocomplcache {
-        let g:neocomplcache_enable_at_startup = 1
-        let g:neocomplcache_enable_camel_case_completion = 1
-        let g:neocomplcache_enable_smart_case = 1
-        let g:neocomplcache_enable_underbar_completion = 1
-        let g:neocomplcache_min_syntax_length = 3
-        let g:neocomplcache_enable_auto_delimiter = 1
+		let g:neocomplcache_enable_at_startup = 1
+		let g:neocomplcache_enable_camel_case_completion = 1
+		let g:neocomplcache_enable_smart_case = 1
+		let g:neocomplcache_enable_underbar_completion = 1
+		let g:neocomplcache_min_syntax_length = 3
+		let g:neocomplcache_enable_auto_delimiter = 1
 
-        " AutoComplPop like behavior.
-        let g:neocomplcache_enable_auto_select = 0
+		" AutoComplPop like behavior.
+		let g:neocomplcache_enable_auto_select = 0
 
-        " SuperTab like snippets behavior.
-        imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+		" SuperTab like snippets behavior.
+		imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
-        " Plugin key-mappings.
-        imap <C-k>     <Plug>(neocomplcache_snippets_expand)
-        smap <C-k>     <Plug>(neocomplcache_snippets_expand)
-        inoremap <expr><C-g>     neocomplcache#undo_completion()
-        inoremap <expr><C-l>     neocomplcache#complete_common_string()
+		" Plugin key-mappings.
+		imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+		smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+		inoremap <expr><C-g>     neocomplcache#undo_completion()
+		inoremap <expr><C-l>     neocomplcache#complete_common_string()
 
 
-        " <CR>: close popup
-        " <s-CR>: close popup and save indent.
-        inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
-        inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup() "\<CR>" : "\<CR>"
-        " <TAB>: completion.
-        inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+		" <CR>: close popup
+		" <s-CR>: close popup and save indent.
+		inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+		inoremap <expr><s-CR> pumvisible() ? neocomplcache#close_popup() "\<CR>" : "\<CR>"
+		" <TAB>: completion.
+		inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-        " <C-h>, <BS>: close popup and delete backword char.
-        inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-        inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-        inoremap <expr><C-y>  neocomplcache#close_popup()
-        inoremap <expr><C-e>  neocomplcache#cancel_popup()
+		" <C-h>, <BS>: close popup and delete backword char.
+		inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+		inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+		inoremap <expr><C-y>  neocomplcache#close_popup()
+		inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
-        " Enable omni completion.
-        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-        autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+		" Enable omni completion.
+		autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+		autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+		autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+		autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+		autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-        " Enable heavy omni completion.
-        if !exists('g:neocomplcache_omni_patterns')
-            let g:neocomplcache_omni_patterns = {}
-        endif
-        let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-        "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-        let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-        let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-        let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+		" Enable heavy omni completion.
+		if !exists('g:neocomplcache_omni_patterns')
+			let g:neocomplcache_omni_patterns = {}
+		endif
+		let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+		"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+		let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+		let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+		let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
-        " For snippet_complete marker.
-        if has('conceal')
-            set conceallevel=2 concealcursor=i
-        endif
+		" For snippet_complete marker.
+		if has('conceal')
+			set conceallevel=2 concealcursor=i
+		endif
 
-     " }
+	" }
 
 	" OmniComplete {
 		if has("autocmd") && exists("+omnifunc")
@@ -386,79 +385,79 @@
 		" automatically open and close the popup menu / preview window
 		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 		set completeopt=menu,preview,longest
-    " }
+	" }
 
 
 	" PIV {
-      	let g:DisableAutoPHPFolding = 0
-      	let g:PIVAutoClose = 0
-   	" }
-	
+		let g:DisableAutoPHPFolding = 0
+		let g:PIVAutoClose = 0
+	" }
+
 	" PyMode {
-       	let g:pymode_lint_checker = "pyflakes"
-   	" }
-	
+		let g:pymode_lint_checker = "pyflakes"
+	" }
+
 	" Python {
 		" Disable if python is not available
 		if !has('python')
-           let g:pymode = 1
-        endif
+			let g:pymode = 1
+		endif
 	" }
 
 	" Session List {
-       	set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
-       	nmap <leader>sl :SessionList<CR>
-       	nmap <leader>ss :SessionSave<CR>
-   	" }
+		set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
+		nmap <leader>sl :SessionList<CR>
+		nmap <leader>ss :SessionSave<CR>
+	" }
 
 	" Tabularize {
-        if exists(":Tabularize")
-          nmap <Leader>a= :Tabularize /=<CR>
-          vmap <Leader>a= :Tabularize /=<CR>
-          nmap <Leader>a: :Tabularize /:<CR>
-          vmap <Leader>a: :Tabularize /:<CR>
-          nmap <Leader>a:: :Tabularize /:\zs<CR>
-          vmap <Leader>a:: :Tabularize /:\zs<CR>
-          nmap <Leader>a, :Tabularize /,<CR>
-          vmap <Leader>a, :Tabularize /,<CR>
-          nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-          vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+		if exists(":Tabularize")
+			nmap <Leader>a= :Tabularize /=<CR>
+			vmap <Leader>a= :Tabularize /=<CR>
+			nmap <Leader>a: :Tabularize /:<CR>
+			vmap <Leader>a: :Tabularize /:<CR>
+			nmap <Leader>a:: :Tabularize /:\zs<CR>
+			vmap <Leader>a:: :Tabularize /:\zs<CR>
+			nmap <Leader>a, :Tabularize /,<CR>
+			vmap <Leader>a, :Tabularize /,<CR>
+			nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+			vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
 
-          " The following function automatically aligns when typing a
-          " supported character
-          inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+			" The following function automatically aligns when typing a
+			" supported character
+			inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
-          function! s:align()
-              let p = '^\s*|\s.*\s|\s*$'
-              if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-                  let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-                  let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-                  Tabularize/|/l1
-                  normal! 0
-                  call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-              endif
-          endfunction
+			function! s:align()
+				let p = '^\s*|\s.*\s|\s*$'
+				if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+					let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+					let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+					Tabularize/|/l1
+					normal! 0
+					call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+				endif
+			endfunction
 
-        endif
- 	" }
+		endif
+	" }
 
 
 	" TagBar {
-       	nnoremap <silent> <leader>tt :TagbarToggle<CR>
-   	"}
+		nnoremap <silent> <leader>tt :TagbarToggle<CR>
+	"}
 
 " }
 
 " Use local vimrc if available {
-    if filereadable(expand("~/.vimrc.local"))
-        source ~/.vimrc.local
-    endif
+	if filereadable(expand("~/.vimrc.local"))
+		source ~/.vimrc.local
+	endif
 " }
 
 " Use local gvimrc if available and gui is running {
-    if has('gui_running')
-        if filereadable(expand("~/.gvimrc.local"))
-            source ~/.gvimrc.local
-        endif
-    endif
+	if has('gui_running')
+		if filereadable(expand("~/.gvimrc.local"))
+			source ~/.gvimrc.local
+		endif
+	endif
 " }
