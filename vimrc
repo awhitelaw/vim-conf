@@ -9,32 +9,95 @@
 	" }	
 " }
 
-
+ 
 
 
 " BUNDLES {
-	source ~/.vim/vimrc/bundles/Vundle.vim
-	source ~/.vim/vimrc/bundles/Dependencies.vim
+	" Vundle {
+		set rtp+=~/.vim/bundle/vundle
+		call vundle#rc()
+		Bundle 'gmarik/vundle'
+	" }
+	
+	" DEPENDENCIES {
+		Bundle 'MarcWeber/vim-addon-mw-utils'
+		Bundle 'tomtom/tlib_vim'
+		if executable('ack')
+			Bundle 'mileszs/ack.vim'
+		endif
+	" }
+	
 	" Theme {
-		source ~/.vim/vimrc/bundles/themes.vim	
+		Bundle 'flazz/vim-colorschemes'
+		Bundle 'nanotech/jellybeans.vim'
+		Bundle 'chriskempson/vim-tomorrow-theme'
+		Bundle 'altercation/vim-colors-solarized'
+	" }
+	
+	" General {
+		"File Explorer"
+		Bundle 'scrooloose/nerdtree'
+		"Make NERDTree act more like an IDE file explorer by having it always present across tabs"
+		Bundle 'jistr/vim-nerdtree-tabs'
+		"Text-mate like snippets"
+		Bundle 'garbas/vim-snipmate'
+		"Surroundings management. Add xml/html surroundings or brackets, speech marks etc"
+		Bundle 'tpope/vim-surround'
+		"Autoclose quotes, tags etc"
+        Bundle 'AutoClose'
+		"Full path fuzzy file, buffer, mru, tag, ... finder for Vim."
+        Bundle 'kien/ctrlp.vim'
+		"Improved Matching from %"
+		Bundle 'matchit.zip'
+		"Status line modifier"
+		Bundle 'Lokaltog/vim-powerline'
+		"EasyMotion provides a much simpler way to use some motions in vim"
+		Bundle 'Lokaltog/vim-easymotion'
+		"Colour scheme helper for terminal Vim from Gvim colourshemes"
+		Bundle 'godlygeek/csapprox'
+		"Easier buffer exploration"
+		Bundle 'corntrace/bufexplorer'
 	" }
 
 	" Programming {
 		
 		" General {
-			source ~/.vim/vimrc/bundles/NERDTree.vim
-			source ~/.vim/vimrc/bundles/snipmate.vim
+			"Syntax validation"
 			Bundle 'scrooloose/syntastic'
+			"Code comments on steroids"
+			Bundle 'scrooloose/nerdcommenter'
+			"Some formatting niceties"
+			Bundle 'godlygeek/tabular'
+			"Provide an overview of current funcs class etc like an IDE"
+			if executable('ctags')
+				Bundle 'majutsushi/tagbar'
+			endif
+			"Some nice autocompletion"
+			Bundle 'Shougo/neocomplcache'
+			"Autocomplete simplifier using the tab key"
+			Bundle 'ervandew / supertab'
+		" }
+		
+		
+		" PHP {
+			"Designed to provide PHP support"
+			Bundle 'spf13/PIV'
 		" }
 	" }
-	
-	" Version Control {
 		
+	" Version Control {
+		"GIT wrapper"
+		Bundle 'tpope/vim-fugitive'
 	" }
 " }
 
 
-
+" THEME SET {
+	if filereadable(expand("~/.vim/bundle/jellybeans.vim/colors/jellybeans.vim"))
+		set background=dark
+		colorscheme jellybeans 
+	endif
+" }
 
 " GENERAL {
 
@@ -50,6 +113,11 @@
 	noremap , \
 	let mapleader=","									" Change the default leader key
 
+	" Use ; instead of : so ;w or ;q works
+	nnoremap ; :
+
+	" cd to to the directory of the current file in the window 
+	autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 " }
 
 " Backups {
@@ -103,6 +171,25 @@
 	set foldenable										" auto fold code
 	"set list
 	"set listchars=tab:,.,trail:.,extends:#,nbsp:.		" Highlight problematic whitespace
+	
+	
+	if has('cmdline_info')
+		set ruler                   " show the ruler
+		set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+	    set showcmd                 " show partial commands in status line and
+	                                " selected characters/lines in visual mode
+	endif
+
+
+	if has('statusline')
+		set laststatus=2									" Broken down into easily includeable segments
+		set statusline=%<%f\								" Filename
+		set statusline+=%w%h%m%r							" Options
+		set statusline+=%{fugitive#statusline()}	        "  Git Hotness
+		set statusline+=\ [%{&ff}/%Y]                       " filetype
+		set statusline+=\ [%{getcwd()}]                     " current dir
+		set statusline+=%=%-14.(%l,%c%V%)\ %p%%              "Right aligned file nav info
+	endif
 " }
 
 " Sounds {
@@ -111,3 +198,28 @@
 	set t_vb=
 " }
 
+
+
+
+
+
+" PLUGINS{
+	
+	" NERDTree {
+		if filereadable(expand('~/.vim/bundle/nerdtree/README.markdown'))
+			map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+			map <leader>e :NERDTreeFind<CR>
+			nmap <leader>nt :NERDTreeFind<CR>
+
+			let NERDTreeShowBookmarks=1
+			let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+			let NERDTreeChDirMode=0
+			"let NERDTreeQuitOnOpen=1
+			let NERDTreeShowHidden=1
+			let NERDTreeKeepTreeInNewTab=1
+	
+			au VimEnter *  NERDTree                         " Auto open NERDTree when vim opens
+		endif		
+	" }
+
+" }
