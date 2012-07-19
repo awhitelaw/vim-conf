@@ -57,6 +57,8 @@
 		Bundle 'godlygeek/csapprox'
 		"Easier buffer exploration"
 		Bundle 'corntrace/bufexplorer'
+		"Session Helper"
+		Bundle 'vim-scripts/sessionman.vim'
 	" }
 
 	" Programming {
@@ -74,14 +76,34 @@
 			endif
 			"Some nice autocompletion"
 			Bundle 'Shougo/neocomplcache'
-			"Autocomplete simplifier using the tab key"
-			Bundle 'ervandew / supertab'
 		" }
 		
-		
+		"HTML {
+			Bundle 'HTML-AutoCloseTag'
+            Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+		" }
+
+		" Javascript {
+			Bundle 'leshill/vim-json'
+            Bundle 'groenewege/vim-less'
+            Bundle 'taxilian/vim-web-indent'
+		" }
+
+
 		" PHP {
 			"Designed to provide PHP support"
 			Bundle 'spf13/PIV'
+		" }
+		
+		" Python { 
+			Bundle 'klen/python-mode'
+			Bundle 'python.vim'
+			Bundle 'python_match.vim'
+			Bundle 'pythoncomplete'
+		" }
+
+		" Ruby { 
+			Bundle 'tpope/vim-rails'
 		" }
 	" }
 		
@@ -204,7 +226,25 @@
 
 
 " PLUGINS{
+	" AutoCloseTag {
+		" Make it so AutoCloseTag works for xml and xhtml files as well
+		au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
+		nmap <Leader>ac <Plug>ToggleAutoCloseMappings
+	" }
 	
+	" Ctags {
+        	set tags=/.vim/tags
+    	" }
+
+	" Fugitive {	
+		nnoremap <silent> <leader>gs :Gstatus<CR>
+		nnoremap <silent> <leader>gd :Gdiff<CR>
+		nnoremap <silent> <leader>gc :Gcommit<CR>
+		nnoremap <silent> <leader>gb :Gblame<CR>
+		nnoremap <silent> <leader>gl :Glog<CR>
+		nnoremap <silent> <leader>gp :Git push<CR>
+	" }
+
 	" NERDTree {
 		if filereadable(expand('~/.vim/bundle/nerdtree/README.markdown'))
 			map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -220,6 +260,49 @@
 	
 			au VimEnter *  NERDTree                         " Auto open NERDTree when vim opens
 		endif		
+	" }
+	
+	" Misc {
+        	let g:NERDShutUp=1
+        	let b:match_ignorecase = 1
+    	" }
+	
+	" OmniComplete {
+		if has("autocmd") && exists("+omnifunc")
+			autocmd Filetype *
+						\if &omnifunc == "" |
+						\setlocal omnifunc=syntaxcomplete#Complete |
+						\endif
+		endif
+
+		hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+		hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+		hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+
+		" some convenient mappings
+		inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+		inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+		inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+		inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+		inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+		inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+		" automatically open and close the popup menu / preview window
+		au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+		set completeopt=menu,preview,longest
+    " }
+
+
+	" PIV {
+        	let g:DisableAutoPHPFolding = 0
+        	let g:PIVAutoClose = 0
+    	" }
+
+	" Python {
+		" Disable if python is not available
+		if !has('python')
+           let g:pymode = 1
+        endif
 	" }
 
 " }
