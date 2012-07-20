@@ -1,8 +1,8 @@
 " Vim Config "
-"
+
 " This config is heavily based on spf13 vim config which can be 
 " found at https://github.com/spf13/spf13-vim
-"
+
 
 
 " INITIAL {
@@ -207,13 +207,14 @@ set nocompatible									" Disable Vi compatibility (required)
 		set ruler                   " show the ruler
 		set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
 		set showcmd                 " show partial commands in status line and
-		" selected characters/lines in visual mode
+									"selected characters/lines in visual mode
 	endif
 
 
 	if has('statusline')
 		set laststatus=2									" Broken down into easily includeable segments
-		set statusline=%<%f\								" Filename
+		"This option caused problems for me forcing rendering to be off by 1 line"
+		"set statusline=%<%f\								" Filename
 		set statusline+=%w%h%m%r							" Options
 		set statusline+=%{fugitive#statusline()}	        "  Git Hotness
 		set statusline+=\ [%{&ff}/%Y]                       " filetype
@@ -375,11 +376,11 @@ set nocompatible									" Disable Vi compatibility (required)
 			let NERDTreeShowBookmarks=1
 			let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 			let NERDTreeChDirMode=0
-			"let NERDTreeQuitOnOpen=1
+			let NERDTreeQuitOnOpen=1
 			let NERDTreeShowHidden=1
 			let NERDTreeKeepTreeInNewTab=1
 
-			au VimEnter *  NERDTree                         " Auto open NERDTree when vim opens
+			autocmd VimEnter *  NERDTree                         " Auto open NERDTree when vim opens
 		endif		
 	" }
 
