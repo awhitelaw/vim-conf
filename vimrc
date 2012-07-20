@@ -340,6 +340,12 @@ set nocompatible									" Disable Vi compatibility (required)
 	" Buffer explorer {
 		nmap <leader>b :BufExplorer<CR>
 	" }
+	
+	" CSApprox { 
+		if !has("gui")
+		    let g:CSApprox_loaded = 1			" hide any annoying warnings we may get if there is no gui support
+		endif
+	" }
 
 	" Ctags {
 		set tags=/.vim/tags
@@ -478,6 +484,10 @@ set nocompatible									" Disable Vi compatibility (required)
 		let g:PIVAutoClose = 0
 	" }
 
+	" Powerline { 
+		let g:Powerline_symbols = 'fancy'
+	" }
+
 	" PyMode {
 		let g:pymode_lint_checker = "pyflakes"
 	" }
@@ -493,6 +503,11 @@ set nocompatible									" Disable Vi compatibility (required)
 		set sessionoptions=blank,buffers,curdir,folds,tabpages,winsize
 		nmap <leader>sl :SessionList<CR>
 		nmap <leader>ss :SessionSave<CR>
+	" }
+	
+	" Syntastic { 
+		"mark syntax errors with :signs
+		let g:syntastic_enable_signs=1"
 	" }
 
 	" Tabularize {
