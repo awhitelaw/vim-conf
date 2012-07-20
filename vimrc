@@ -1,3 +1,10 @@
+" Vim Config "
+"
+" This config is heavily based on spf13 vim config which can be 
+" found at https://github.com/spf13/spf13-vim
+"
+
+
 " INITIAL {
 set nocompatible									" Disable Vi compatibility (required)
 
@@ -76,6 +83,8 @@ set nocompatible									" Disable Vi compatibility (required)
 			endif
 			"Some nice autocompletion"
 			Bundle 'Shougo/neocomplcache'
+			"required"
+			"Bundle 'Shougo/neocomplcache-snippets-complete'
 		" }
 
 		"HTML {
@@ -242,7 +251,82 @@ set nocompatible									" Disable Vi compatibility (required)
 
 
 
+" Key Mappings { 
+	" Easier moving in tabs and windows
+	map <C-J> <C-W>j<C-W>_
+	map <C-K> <C-W>k<C-W>_
+	map <C-L> <C-W>l<C-W>_
+	map <C-H> <C-W>h<C-W>_
 
+	" Wrapped lines goes down/up to next row, rather than next line in file.
+	nnoremap j gj
+	nnoremap k gk
+
+	" The following two lines conflict with moving to top and bottom of the
+	" screen
+	" If you prefer that functionality, comment them out.
+	map <S-H> gT
+	map <S-L> gt
+
+	" Stupid shift key fixes
+	cmap W w
+	cmap WQ wq
+	cmap wQ wq
+	cmap Q q
+	cmap Tabe tabe
+
+	" Yank from the cursor to the end of the line, to be consistent with C and D.
+	nnoremap Y y$
+
+	""" Code folding options
+	nmap <leader>f0 :set foldlevel=0<CR>
+	nmap <leader>f1 :set foldlevel=1<CR>
+	nmap <leader>f2 :set foldlevel=2<CR>
+	nmap <leader>f3 :set foldlevel=3<CR>
+	nmap <leader>f4 :set foldlevel=4<CR>
+	nmap <leader>f5 :set foldlevel=5<CR>
+	nmap <leader>f6 :set foldlevel=6<CR>
+	nmap <leader>f7 :set foldlevel=7<CR>
+	nmap <leader>f8 :set foldlevel=8<CR>
+	nmap <leader>f9 :set foldlevel=9<CR>
+
+	"clearing highlighted search
+	nmap <silent> <leader>/ :nohlsearch<CR>
+
+	" Shortcuts
+	" Change Working Directory to that of the current file
+	cmap cwd lcd %:p:h
+	cmap cd. lcd %:p:h
+
+	" visual shifting (does not exit Visual mode)
+	vnoremap < <gv
+	vnoremap > >gv
+
+	" Fix home and end keybindings for screen, particularly on mac
+	" - for some reason this fixes the arrow keys too. huh.
+	map [F $
+	imap [F $
+	map [H g0
+	imap [H g0
+
+	" For when you forget to sudo.. Really Write the file.
+	cmap w!! w !sudo tee % >/dev/null
+
+	" Some helpers to edit mode
+	" http://vimcasts.org/e/14
+	cnoremap %% <C-R>=expand('%:h').'/'<cr>
+	map <leader>ew :e %%
+	map <leader>es :sp %%
+	map <leader>ev :vsp %%
+	map <leader>et :tabe %%
+
+	" Adjust viewports to the same size
+	map <Leader>= <C-w>=
+
+	" Easier horizontal scrolling
+	map zl zL
+	map zh zH
+" }
 
 
 " PLUGINS{
