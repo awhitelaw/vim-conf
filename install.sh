@@ -24,7 +24,7 @@ source "${DIR}/install/bundle_clean.sh"
 
 
 #Check that vundle is initialised
-if [ ! -d "$DIR/vim/bundle/vundle/" ];then
+if [ ! -f "$DIR/vim/bundle/vundle/README.md" ];then
 	echo "Vundle not found. Installing"
 	
 	cd "$DIR"
