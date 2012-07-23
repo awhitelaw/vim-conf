@@ -86,31 +86,31 @@ set nocompatible									" Disable Vi compatibility (required)
 		" }
 
 		"HTML {
-			Bundle 'HTML-AutoCloseTag'
-			Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
+			"Bundle 'HTML-AutoCloseTag'
+			"Bundle 'ChrisYip/Better-CSS-Syntax-for-Vim'
 		" }
 
 		" Javascript {
-			Bundle 'leshill/vim-json'
-			Bundle 'groenewege/vim-less'
-			Bundle 'taxilian/vim-web-indent'
+			"Bundle 'leshill/vim-json'
+			"Bundle 'groenewege/vim-less'
+			"Bundle 'taxilian/vim-web-indent'
 		" }
 
 
 		" PHP {
 			"Designed to provide PHP support"
-			Bundle 'spf13/PIV'
+			"Bundle 'spf13/PIV'
 		" }
 
 		" Python { 
-			Bundle 'klen/python-mode'
-			Bundle 'python.vim'
-			Bundle 'python_match.vim'
-			Bundle 'pythoncomplete'
+			"Bundle 'klen/python-mode'
+			"Bundle 'python.vim'
+			"Bundle 'python_match.vim'
+			"Bundle 'pythoncomplete'
 		" }
 
 		" Ruby { 
-			Bundle 'tpope/vim-rails'
+			"Bundle 'tpope/vim-rails'
 		" }
 	" }
 
@@ -380,7 +380,7 @@ set nocompatible									" Disable Vi compatibility (required)
 	" }
 
 	" JSON {
-		nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
+		"nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 	" }
 
 	" NERDTree {
