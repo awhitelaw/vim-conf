@@ -25,12 +25,14 @@ do
 	if [[ -e "$p1" ]];then
 		if [[ -h "$p1" ]];then
 			chkpath=`readlink "$p1"`
-
 			if [ "$chkpath" = "$p2" ];then
 				#It's a link we've set previously so it's fine
 				continue;
+			else
+				rm -f "$p1"
 			fi
-		else
+		fi
+		if [[ -e "$p1" ]];then
 			#it's a link we don't know so error out
 			echo "We have detected previous files that were not set by this script."
 			echo "To continue, please manually remove the following files"
@@ -46,14 +48,16 @@ do
 
 						if [ "$chkpath" = "$py2" ];then
 							continue;
+						else
+							echo "$py1"
 						fi
 					else
 						#it's a link we don't know so error out
-						echo $py1;
+						echo "$py1";
 					fi
 				fi
 			done
-
+			exit 0
 		fi
 	fi
 done
