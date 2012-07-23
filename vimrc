@@ -83,8 +83,6 @@ set nocompatible									" Disable Vi compatibility (required)
 			endif
 			"Some nice autocompletion"
 			Bundle 'Shougo/neocomplcache'
-			"required"
-			"Bundle 'Shougo/neocomplcache-snippets-complete'
 		" }
 
 		"HTML {
@@ -140,7 +138,7 @@ set nocompatible									" Disable Vi compatibility (required)
 
 	set hidden											" Allow buffer switching without saving
 	set shortmess+=filmnrxoOtT							" Message abbreviation
-	set spell											" Enable spellchecking
+	"set spell											" Enable spellchecking
 
 	noremap , \
 	let mapleader=","									" Change the default leader key
@@ -160,14 +158,17 @@ set nocompatible									" Disable Vi compatibility (required)
 
 
 " Formatting {
-	syntax on											" Lovely syntax highlighting
+	if &t_Co > 2 || has("gui_running")
+		  syntax on
+	endif
+
 	set autoindent								        " indent at the same level of the previous line
 	set cindent
 	set shiftwidth=4									" use indents of 4 spaces
 	"set expandtab										" tabs are spaces, not tabs
 	set tabstop=4										" an indentation every four columns
 	set softtabstop=4									" let backspace delete indent
-	set pastetoggle=<F12>						        " pastetoggle (sane indentation on pastes)
+	set pastetoggle=<F5>						        " pastetoggle (sane indentation on pastes)
 	"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 	" Remove trailing whitespaces and ^M chars
 	autocmd FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -179,6 +180,10 @@ set nocompatible									" Disable Vi compatibility (required)
 	set smartcase										" non-case search
 	set incsearch
 	set hlsearch
+	if &t_Co > 2 || has("gui_running")
+		  set hlsearch
+	endif
+
 	set wildmenu
 	set wildmode=list:longest,full
 	set wildignore+=*.o,*.obj,*.exe,*.so,*.dll,*.pyc,.svn,.hg,.bzr,.git,.sass-cache,*.class,*.scssc	
@@ -198,7 +203,7 @@ set nocompatible									" Disable Vi compatibility (required)
 	set whichwrap=b,s,h,l,<,>,[,]				   		" backspace and cursor keys wrap to
 	set scrolljump=5			            			" lines to scroll when cursor leaves screen
 	set scrolloff=3								 		" minimum lines to keep above and below cursor
-	set foldenable										" auto fold code
+	"set foldenable										" auto fold code
 	"set list
 	"set listchars=tab:,.,trail:.,extends:#,nbsp:.		" Highlight problematic whitespace
 
@@ -321,6 +326,7 @@ set nocompatible									" Disable Vi compatibility (required)
 	" http://vimcasts.org/e/14
 	cnoremap %% <C-R>=expand('%:h').'/'<cr>
 	map <leader>ew :e %%
+	map <leader>eb :e #								"Quick way to load buffer
 	map <leader>es :sp %%
 	map <leader>ev :vsp %%
 	map <leader>et :tabe %%
@@ -484,12 +490,12 @@ set nocompatible									" Disable Vi compatibility (required)
 
 
 	" PIV {
-		let g:DisableAutoPHPFolding = 0
+		let g:DisableAutoPHPFolding = 1
 		let g:PIVAutoClose = 0
 	" }
 
 	" Powerline { 
-		let g:Powerline_symbols = 'fancy'
+		"let g:Powerline_symbols = 'fancy'
 	" }
 
 	" PyMode {
